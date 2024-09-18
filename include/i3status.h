@@ -69,7 +69,7 @@ extern char *pct_mark;
 /* Allows for the definition of a variable without opening a new scope, thus
  * suited for usage in a macro. Idea from wmii. */
 #define with(type, var, init) \
-    for (type var = (type)-1; (var == (type)-1) && ((var = (init)) || 1); var = (type)1)
+    for (type var = (type) - 1; (var == (type) - 1) && ((var = (init)) || 1); var = (type)1)
 
 #define CASE_SEC(name)              \
     if (BEGINS_WITH(current, name)) \
@@ -441,6 +441,16 @@ typedef struct {
 } file_contents_ctx_t;
 
 void print_file_contents(file_contents_ctx_t *ctx);
+
+typedef struct {
+    yajl_gen json_gen;
+    char *buf;
+    const size_t buflen;
+    const char *format;
+    const char *format_bad;
+} brightness_ctx_t;
+
+void print_brightness(brightness_ctx_t *ctx);
 
 /* socket file descriptor for general purposes */
 extern int general_socket;
